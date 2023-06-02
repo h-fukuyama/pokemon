@@ -1,23 +1,31 @@
 <?php
 $url = 'https://pokeapi.co/api/v2/pokemon/?limit=10&offset=0';
-$url2 = 'https://pokeapi.co/api/v2/pokemon/1';
-$response = file_get_contents($url2);
-
+$response = file_get_contents($url);
 $data = json_decode($response, true);
 
-print("<pre>");
-//  foreach($data['results'] as $key => $value){
-     echo "name: " . $data['name'] . "<br>";
-     $picture = $data['sprites']['front_default'];
-     echo "<img src=$picture><br>";
-     echo "type: ";
-     foreach($data['types'] as $key => $value){
-        echo $value['type']['name'] . " ";
-     }
-     echo "<br>";
-     echo "height: " . $data['height'] . "<br>";
-     echo "weight: " . $data['weight']. "<br>";
-print("</pre>");
+print("<div>");
+foreach($data['results'] as $key => $value){
+    print("<p>");
+    $pokemon_url = $value['url'];
+    $pokemon_response = file_get_contents($pokemon_url);
+    $pokemon_data = json_decode($pokemon_response, true);
+
+    //var_dump($pokemon_data);
+    echo "name: " . $pokemon_data['name'] . "<br>";
+    $picture = $pokemon_data['sprites']['front_default'];
+    echo "<img src=$picture><br>";
+    echo "type: ";
+    foreach($pokemon_data['types'] as $key => $val){
+        echo $val['type']['name'] . " ";
+    }
+    echo "<br>";
+    echo "height: " . $pokemon_data['height'] . "<br>";
+    echo "weight: " . $pokemon_data['weight']. "<br>";
+    echo "<br>";
+    print("</p>");
+}
+print("</div>");
+
 
 ?>
 
