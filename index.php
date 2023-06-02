@@ -3,14 +3,14 @@ $url = 'https://pokeapi.co/api/v2/pokemon/?limit=10&offset=0';
 $response = file_get_contents($url);
 $data = json_decode($response, true);
 
-print("<div>");
+print("<div class='parent'>");
 foreach($data['results'] as $key => $value){
-    print("<p>");
     $pokemon_url = $value['url'];
     $pokemon_response = file_get_contents($pokemon_url);
     $pokemon_data = json_decode($pokemon_response, true);
 
     //var_dump($pokemon_data);
+    print("<div class='child'>");
     echo "name: " . $pokemon_data['name'] . "<br>";
     $picture = $pokemon_data['sprites']['front_default'];
     echo "<img src=$picture><br>";
@@ -20,9 +20,8 @@ foreach($data['results'] as $key => $value){
     }
     echo "<br>";
     echo "height: " . $pokemon_data['height'] . "<br>";
-    echo "weight: " . $pokemon_data['weight']. "<br>";
-    echo "<br>";
-    print("</p>");
+    echo "weight: " . $pokemon_data['weight'];
+    print("</div>");
 }
 print("</div>");
 
@@ -35,6 +34,7 @@ print("</div>");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='css.css'>
     <title>Document</title>
 </head>
 <body>
