@@ -8,9 +8,9 @@
 
 .child {
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
     width: 250px;
-    height: 300px;
+    height: 320px;
     background-color: lightgrey;
     margin: 10px;
 }
