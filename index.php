@@ -1,9 +1,12 @@
 <?php
+
 function show(){
-    if(!isset($_GET['page_id'])){
+    if(!isset($_GET)){
         $now = 0;
-    }else{
-        $now = $_GET['page_id'];
+    }else if(isset($_GET) && $_GET['next']=="次へ"){
+        $now = $_GET['now'] + 10;
+    }else if($_GET['back']=="前へ"){
+        $now = $_GET['now'] - 10;
     }
     $url = "https://pokeapi.co/api/v2/pokemon/?limit=10&offset=" . $now;
     $response = file_get_contents($url);
@@ -30,14 +33,8 @@ function show(){
         print("</div>");
     }
     print("</div>");
+    return $now;
 }
-
-if(!isset($_GET['page_id'])){
-    $now = 0;
-}else{
-    $now = $_GET['page_id'];
-}
-
 
 ?>
 
@@ -51,12 +48,14 @@ if(!isset($_GET['page_id'])){
     <title>Document</title>
 </head>
 <body>
-    <?php show() ?>
-    <form action="" method="get">
-    <input type="button" id="back" value="前へ">
+    <?php $now = show() ?>
+    <form action="index.php" method="get">
+        <input type="submit" name="back" value="前へ">
+        <input type="hidden" value=<?= $now ?> name="now">
     </form>
-    <form action="" method="next">
-    <input type="button" id="back" value="次へ">
+    <form action="index.php" method="get">
+        <input type="submit" name="next" value="次へ">
+        <input type="hidden" value=<?= $now ?> name="now">
     </form>
 
 </body>
