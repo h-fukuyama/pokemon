@@ -28,7 +28,11 @@ function show(){
         echo "<img src=$picture><br>";
         echo "ぞくせい: ";
         foreach($pokemon_data['types'] as $key => $val){
-            echo $val['type']['name'] . " ";
+            //var_dump($val['type']['url']);
+            $types_url = $val['type']['url'];
+            $types_response = file_get_contents($types_url);
+            $types_data = json_decode($types_response, true);
+            echo $types_data['names'][0]['name'] . " ";
         }
         echo "<br>";
         echo "たかさ: " . $pokemon_data['height']*10 . "cm<br>";
