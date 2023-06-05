@@ -1,11 +1,11 @@
 <?php
 
 function show(){
-    if(!isset($_GET)){
+    if(!isset($_GET['page'])){
         $now = 0;
-    }else if(isset($_GET) && $_GET['next']=="次へ"){
+    }else if($_GET['page']=="next"){
         $now = $_GET['now'] + 10;
-    }else if($_GET['back']=="前へ"){
+    }else if($_GET['page']=="back"){
         $now = $_GET['now'] - 10;
     }
     $url = "https://pokeapi.co/api/v2/pokemon/?limit=10&offset=" . $now;
@@ -18,7 +18,6 @@ function show(){
         $pokemon_response = file_get_contents($pokemon_url);
         $pokemon_data = json_decode($pokemon_response, true);
 
-        //var_dump($pokemon_data);
         print("<div class='child'>");
         echo "name: " . $pokemon_data['name'] . "<br>";
         $picture = $pokemon_data['sprites']['front_default'];
@@ -50,11 +49,13 @@ function show(){
 <body>
     <?php $now = show() ?>
     <form action="index.php" method="get">
-        <input type="submit" name="back" value="前へ">
+        <input type="submit" value="前へ">
+        <input type="hidden" name="page" value="back">
         <input type="hidden" value=<?= $now ?> name="now">
     </form>
     <form action="index.php" method="get">
-        <input type="submit" name="next" value="次へ">
+        <input type="submit" value="次へ">
+        <input type="hidden" name="page" value="next">
         <input type="hidden" value=<?= $now ?> name="now">
     </form>
 
