@@ -1,9 +1,12 @@
 .parent {
     overflow: hidden;
+    text-align: center;
+    margin: auto;
 }
 
 .child {
     float: left;
+    text-align: center;
 }
 
 .child {
@@ -15,17 +18,30 @@
     margin: 10px;
 }
 
-.button_left {
-    display       : inline-block;
-    border-radius : 5%;          /* 角丸       */
-    font-size     : 18pt;        /* 文字サイズ */
-    text-align    : center;      /* 文字位置   */
-    cursor        : pointer;     /* カーソル   */
-    padding       : 12px 12px;   /* 余白       */
-    background    : #000066;     /* 背景色     */
-    color         : #ffffff;     /* 文字色     */
-    line-height   : 1em;         /* 1行の高さ  */
-    transition    : .3s;         /* なめらか変化 */
-    box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
-    border        : 2px solid #000066;    /* 枠の指定 */
-  }
+#button {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+form .button_left {
+    justify-content: left;
+    height: 80px;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+}
+
+form .button_right {
+    justify-content: right;
+    height: 80px;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+}
+
+.child #name {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+}

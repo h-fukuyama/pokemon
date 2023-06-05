@@ -18,17 +18,21 @@ function show(){
         $pokemon_response = file_get_contents($pokemon_url);
         $pokemon_data = json_decode($pokemon_response, true);
 
+        $url_species = "https://pokeapi.co/api/v2/pokemon-species/" . $now+$key+1;
+        $response_species = file_get_contents($url_species);
+        $species_data = json_decode($response_species, true);
+
         print("<div class='child'>");
-        echo "name: " . $pokemon_data['name'] . "<br>";
+        echo "<p id='name'>なまえ: " . $species_data['names'][0]['name'] . "</p><br>";
         $picture = $pokemon_data['sprites']['front_default'];
         echo "<img src=$picture><br>";
-        echo "type: ";
+        echo "ぞくせい: ";
         foreach($pokemon_data['types'] as $key => $val){
             echo $val['type']['name'] . " ";
         }
         echo "<br>";
-        echo "height: " . $pokemon_data['height'] . "<br>";
-        echo "weight: " . $pokemon_data['weight'];
+        echo "たかさ: " . $pokemon_data['height']*10 . "cm<br>";
+        echo "おもさ: " . $pokemon_data['weight']/10 . "kg";
         print("</div>");
     }
     print("</div>");
@@ -48,13 +52,14 @@ function show(){
 </head>
 <body>
     <?php $now = show() ?>
+    <div id="button">
     <form action="index.php" method="get">
         <input type="submit" value="前へ" class="button_left">
         <input type="hidden" name="page" value="back">
         <input type="hidden" value=<?= $now ?> name="now">
     </form>
     <form action="index.php" method="get">
-        <input type="submit" class="next" value="次へ" class="button_right">
+        <input type="submit" value="次へ" class="button_right">
         <input type="hidden" name="page" value="next">
         <input type="hidden" value=<?= $now ?> name="now">
     </form>
