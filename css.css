@@ -1,0 +1,47 @@
+.parent {
+    overflow: hidden;
+    text-align: center;
+    margin: auto;
+}
+
+.child {
+    float: left;
+    text-align: center;
+}
+
+.child {
+    text-align: center;
+    line-height: 30px;
+    width: 250px;
+    height: 320px;
+    background-color: lightgrey;
+    margin: 10px;
+}
+
+#button {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+form .button_left {
+    justify-content: left;
+    height: 80px;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+}
+
+form .button_right {
+    justify-content: right;
+    height: 80px;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+}
+
+.child #name {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+}
