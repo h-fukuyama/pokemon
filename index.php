@@ -49,15 +49,15 @@ function show(){
 <body>
     <?php $now = show() ?>
     <form action="index.php" method="get">
-        <input type="submit" value="前へ">
+        <input type="submit" value="前へ" class="button_left">
         <input type="hidden" name="page" value="back">
         <input type="hidden" value=<?= $now ?> name="now">
     </form>
     <form action="index.php" method="get">
-        <input type="submit" value="次へ">
+        <input type="submit" class="next" value="次へ" class="button_right">
         <input type="hidden" name="page" value="next">
         <input type="hidden" value=<?= $now ?> name="now">
     </form>
-
+    </div>
 </body>
 </html>
