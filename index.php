@@ -23,14 +23,14 @@ function show(){
     }
 
     #nowは最初の
-    if(!isset($_GET['page'])){
-        $_SESSION['now'] = 0;
-    }else if($_GET['page']=="next"){
-        $_SESSION['now'] = $_SESSION['now'] + $_SESSION['list'];
-        $_SESSION['list'] = $_GET['list'];
-    }else if($_GET['page']=="back"){
-        $_SESSION['now'] = $_SESSION['now'] - $_SESSION['list'];
-        $_SESSION['list'] = $_GET['list'];
+    if(isset($_GET['page'])){
+        if($_GET['page']=="next"){
+            $_SESSION['now'] = $_SESSION['now'] + $_SESSION['list'];
+            $_SESSION['list'] = $_GET['list'];
+        }else if($_GET['page']=="back"){
+            $_SESSION['now'] = $_SESSION['now'] - $_SESSION['list'];
+            $_SESSION['list'] = $_GET['list'];
+        }
     }
 
     $url = "https://pokeapi.co/api/v2/pokemon/?limit=" . $_SESSION['list'] . "&offset=" . $_SESSION['now'];
