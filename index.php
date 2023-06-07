@@ -36,6 +36,7 @@ function show(){
     $url = "https://pokeapi.co/api/v2/pokemon/?limit=" . $_SESSION['list'] . "&offset=" . $_SESSION['now'];
     $response = file_get_contents($url);
     $data = json_decode($response, true);
+    echo "<div class='book'>";
     foreach($data['results'] as $key => $value){
         print("<div class='card' onclick='flipCard(this)'>");
         $pokemon_url = $value['url'];
@@ -51,7 +52,7 @@ function show(){
         print("<div class='front'>");
         echo "no. " . $pokemon_data['id'] . " <b>" . $species_data['names'][0]['name'] . "</b><br>";
         $picture = $pokemon_data['sprites']['front_default'];
-        echo "<img src=$picture><br>";
+        echo "<img src=$picture height=100px width=100px><br>";
         echo "ぞくせい: ";
         foreach($pokemon_data['types'] as $key => $val){
             $types_url = $val['type']['url'];
@@ -94,6 +95,7 @@ function show(){
         print("</div>");
         print("</div>");
     }
+    echo "</div>";
 }
 
 ?>
