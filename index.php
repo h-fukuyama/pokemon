@@ -36,9 +36,8 @@ function show(){
     $url = "https://pokeapi.co/api/v2/pokemon/?limit=" . $_SESSION['list'] . "&offset=" . $_SESSION['now'];
     $response = file_get_contents($url);
     $data = json_decode($response, true);
-
-    print("<div class='parent'>");
     foreach($data['results'] as $key => $value){
+        print("<div class='card' onclick='flipCard(this)'>");
         $pokemon_url = $value['url'];
         $pokemon_response = file_get_contents($pokemon_url);
         $pokemon_data = json_decode($pokemon_response, true);
@@ -50,7 +49,7 @@ function show(){
 
         // var_dump($species_data['flavor_text_entries']['ja']['flavor_text']);
         print("<div class='front'>");
-        echo "no. " . $pokemon_data['id'] . " <span id='name'>" . $species_data['names'][0]['name'] . "</span><br>";
+        echo "no. " . $pokemon_data['id'] . " <b>" . $species_data['names'][0]['name'] . "</b><br>";
         $picture = $pokemon_data['sprites']['front_default'];
         echo "<img src=$picture><br>";
         echo "ぞくせい: ";
@@ -64,16 +63,18 @@ function show(){
         echo "たかさ: " . $pokemon_data['height']*10 . "cm<br>";
         echo "おもさ: " . $pokemon_data['weight']/10 . "kg";
         print("</div>");
+
         print("<div class='back'>");
         #ここからカードの裏側情報
         $picture_official = $pokemon_data['sprites']['other']['official-artwork']['front_default'];
         $picture_back = $pokemon_data['sprites']['back_default'];
-        echo "<img src=$picture_official width=150px height=150px><br>
-            <div id='front_back'>
+        echo "<div class='container'>";
+        echo "<img src=$picture_official class='left'>
+            <div id='right'>
             <img src=$picture>
-            <img src=$picture_back>
-            </div>";
-        echo "no. " . $pokemon_data['id'] . " <span id='name'>" . $species_data['names'][0]['name'] . "</span><br>";
+            <img src=$picture_back><br>
+            </div></div>";
+        echo "no. " . $pokemon_data['id'] . " <b>" . $species_data['names'][0]['name'] . "</b>";
         echo "ぞくせい: ";
         foreach($pokemon_data['types'] as $key => $val){
             $types_url = $val['type']['url'];
@@ -91,9 +92,8 @@ function show(){
         }
         echo $japaneseDescription;
         print("</div>");
+        print("</div>");
     }
-    print("</div>");
-
 }
 
 ?>
@@ -109,7 +109,13 @@ function show(){
 </head>
 <body>
     <h1>ポケモン図鑑</h1>
-    <?php $now = show() ?>
+    <?php $now = show() ?><br>
+    <script>
+        function flipCard(card) {
+            card.classList.toggle("flipped");
+        }
+    </script>
+    <footer>
     <form action="index.php" method="get">
         <div id="button">
         <button type="submit" name="list" id="button_2" value=10>10件表示</button>
@@ -132,5 +138,6 @@ function show(){
         <input type="hidden" name="now" value=<?= $_SESSION['now'] ?>>
     </form>
     </div>
-</body>
+    </body>
+    <footer>
 </html>
