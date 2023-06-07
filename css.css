@@ -4,12 +4,12 @@
     margin: auto;
 }
 
-.child {
+.front {
     float: left;
     text-align: center;
 }
 
-.child {
+.front {
     text-align: center;
     vertical-align: middle;
     line-height: 50px;
@@ -30,6 +30,14 @@ h1 {
     display: flex;
     padding: 10px;
     justify-content: space-between;
+}
+
+#button #button_2 {
+    height: 40px;
+    width: 220px;
+    margin: 10px;
+    text-align: center;
+    background-color: lightblue;
 }
 
 form .button_left {
